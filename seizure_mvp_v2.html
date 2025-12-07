@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EpiHelp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#dde7f5;
+    --card:#f4f7fb;
+    --accent:#0f4c81;
+    --muted:#6b7280;
+    --success:#1f8a4d;
+    --danger:#b02a2a;
+    --focus: 3px solid rgba(15,76,129,0.18);
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    text-align: center;
+  }
+
+/* CSS */
+.button-71 {
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  outline: 0;
+  padding: 16px 21px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-71:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  transition: all .3s;
+  width: 92%;
+}
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.button-71:hover {
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .button-71 {
+    padding: 16px 48px;
+  }
+}
+  
+  html,body{height:100%;margin:0;background:var(--bg);color:#0b1720}
+  .app{max-width:1100px;margin:28px auto;padding:22px}
+  header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  h2{margin:0;font-size:25px;color:var(--accent)}
+  h5{margin:0;color: #939292;}
+  p.lead{margin:0;color:var(--muted);font-size:13px}
+  nav{display:flex;gap:8px}
+  button.nav{background:transparent;border:1px solid transparent;padding:8px 12px;border-radius:8px;cursor:pointer}
+  button.nav[aria-current="true"]{background:linear-gradient(90deg,#eaf4fb,#f5fbff);border-color:var(--accent);box-shadow:0 1px 0 rgba(15,76,129,0.06)}
+  main{margin-top:18px}
+  .card{background:var(--card);min-width:420px;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(12,18,26,0.06)}
+  .safety-card{background:#d1f3ed;padding:4px;border-radius:10px;box-shadow:0 6px 18px rgba(12,18,26,0.06)}
+  .grid{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+  .center{display:flex;flex-direction:column;gap:12px}
+  .big-btn{display:inline-block;background:var(--accent);color:white;padding:14px 18px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+  .quiet{background:#eef6fb;border-radius:8px;padding:10px}
+  .muted{color:var(--muted);font-size:13px}
+  label{display:block;font-weight:600;margin-bottom:6px}
+  input[type="text"], textarea, select{width:95%;padding:10px;border-radius:8px;border:1px solid #e6eef7}
+  .log-list{max-height:240px;overflow:auto;border-radius:8px;border:1px dashed #eef4fb;padding:8px}
+  .log-item{padding:8px;border-bottom:1px solid #f1f7fb}
+  .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+  .small{font-size:13px;color:var(--muted)}
+  .row{display:flex;gap:8px}
+  .pill{background:#f5fbff;border-radius:999px;padding:6px 10px;font-weight:600;color:var(--accent)}
+  .alert{background:#fff4f4;border-left:4px solid var(--danger);padding:12px;border-radius:8px}
+  .success{background:#f4fff6;border-left:4px solid var(--success);padding:12px;border-radius:8px}
+  .kbd{background:#f1f5f9;padding:4px 8px;border-radius:6px;font-weight:700}
+  footer{margin-top:14px;font-size:13px;color:var(--muted)}
+  /* focus visuals */
+  button:focus, input:focus, textarea:focus, select:focus {outline: none; box-shadow: var(--focus)}
+  /* responsive */
+  @media(max-width:920px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app" role="application" aria-label="Seizure management prototype">
+  <header>
+    <div>
+      <img src="images/epihelp.png" alt="EpiHelp" width="200" height="126">
+    </div>
+    <nav role="navigation" aria-label="Main">
+      <button class="nav" id="nav-log" aria-current="true">Seizure Log</button>
+      <button class="nav" id="nav-care">Caregiver</button>
+      <button class="nav" id="nav-clinic">Clinician</button>
+    </nav>
+  </header>
+            <input style="margin-right: 320px" type="range" min="10" max="30" id="slider" value="20"
+            onchange="changeSizeBySlider()"
+            onchange="changeSizeBySlider2()"/>
+
+  <main id="app">
+    <!-- LOG VIEW -->
+    <section id="view-log" class="card" aria-hidden="false">
+      <div class="grid">
+        <div class="center">
+          <h2 style="margin:0">Seizure Log</h2>
+              <div>
+      <img src="images/seizure-log.jpg" alt="EpiHelp" width="300" height="200">
+    </div>
+          <h5>The Seizure Log will help you keep an ongoing record of your seizures. Use it to provide your doctor with an accurate report to help diagnosis and treatment. This form allows you to write your own descriptions. </h5>
+                 
+          <aside>
+
+          <div style="height:12px"></div>
+
+          <div class="card alert" id="cluster-alert" style="display:none">
+            <strong>Cluster detected</strong>
+            <h5 id="cluster-text">Multiple events detected in short time.</h5>
+            <div style="margin-top:8px">
+              <button id="notify-care" class="big-btn" style="background:#ff7043">Notify Caregiver</button>
+              <button id="notify-clinic" class="big-btn" style="background:#d83b3b;">Notify Clinic</button>
+            </div>
+          </div>
+
+        </aside>
+
+          <div class="quiet" role="region" aria-label="Quick actions">
+            <div class="row" style="margin-bottom:8px; padding-left:75px; gap:70px">
+              <button class="button-71" id="quick-log-btn" aria-label="Quick log seizure">Quick Log</button>
+              <button class="button-71" id="voice-toggle" style="background:#19486c;">Voice Log</button>
+            </div>
+
+            <div id="manual-form" style="margin-top:8px">
+              <label for="symptoms">Symptoms (brief)</label>
+              <input id="symptoms" type="text" placeholder="e.g., staring, jerking, loss of awareness" aria-describedby="symp-help">
+              <h5 id="symp-help" style="padding-top: 8px;">Tip: add triggers or duration if known.</h5>
+
+              <label for="duration" style="margin-top:8px">Duration (seconds)</label>
+              <input id="duration" type="text" placeholder="e.g., 30">
+
+              <label for="notes" style="margin-top:8px">Notes</label>
+              <textarea id="notes" rows="3" placeholder="Any other context (sleep, missed meds)"></textarea>
+
+              <div style="display:flex;gap:70px;margin-top:10px;padding-left:15px">
+                <button id="save-log" class="big-btn">Save Log</button>
+                <button id="export-json" class="big-btn" style="background:#000000">Export JSON</button>
+                <button id="clear-logs" class="big-btn" style="background:#b02a2a">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h3 style="margin:0">Recent Logs</h3>
+            <div class="log-list" id="logs" role="list" aria-live="polite" aria-label="Recent seizure logs"></div>
+          </div>
+
+        </div>
+
+        <aside>
+          <div class="card" style="padding:12px">
+            <div class="safety-card">Safety Quicksteps</div>
+            <ol>
+              <li>Keep the person safe from hazards.</li>
+              <li>Time the seizure.</li>
+              <li>Stay until recovery.</li>
+              <li>Call emergency services if &gt;5 minutes.</li>
+            </ol>
+          </div>
+
+          <div style="height:12px"></div>
+
+        </aside>
+      </div>
+    </section>
+
+    <!-- CAREGIVER VIEW -->
+    <section id="view-care" class="card" aria-hidden="true" style="display:none;margin-top:14px">
+      <h2 style="margin:0">Caregiver — Alert & Steps</h2>
+                    <div>
+      <img src="images/caregiver.webp" alt="EpiHelp" width="300" height="200">
+    </div>
+      <h5>Seizures can manifest in many ways, from full-body convulsions to brief staring spells. Recognizing early signs and accurately describing the event helps medical professionals tailor treatment. 
+.</h5>
+
+      <div style="margin-top:12px" id="care-content">
+        <div class="success" id="care-status" style="display:none"><strong>Notified</strong><h5>Clinic has been alerted.</h5></div>
+
+        <div style="margin-top:12px;">
+          <label for="contact"><u>Emergency Contact</u></label>
+          <input id="contact" type="text" placeholder="Name / Phone">
+
+          <label for="care-steps" style="margin-top:8px"><u>Care Steps</u></label>
+          <ol>
+            <li style="padding-bottom: 7px;"><b>Stay Calm and Stay with the person:</b> Time the seizure.</li>
+            <li style="padding-bottom: 7px;"><b>Keep them Safe:</b> Clear the area of sharp or hard objects. Place something soft and flat under their head.</li>
+            <li><b>Turn them onto their Side:</b> Once the main jerking stops, roll them gently onto their side to keep their airway clear and prevent choking.</li>
+          </ol>
+
+          <div style="margin-top:10px;">
+            <button id="ack-step" class="button-71">I followed steps</button>
+            <button id="call-ems" class="button-71" style="background:#b02a2a; margin-left: 30px;">Call Emergency Services</button>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <h3 style="margin:0">Export / Share</h3>
+          <h5>Share an anonymized summary with school or clinician.</h5>
+          <button id="share-summary" class="big-btn" style="background:#000000">Generate Shareable Summary</button>
+          <div id="share-output" class="quiet" style="margin-top:8px;display:none"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLINIC VIEW -->
+    <section id="view-clinic" class="card" aria-hidden="true" style="display:none;margin-top:14px">
+      <h2 style="margin:0">Clinician Dashboard</h2>
+                    <div>
+      <img src="images/clinician.webp" alt="EpiHelp" width="300" height="200">
+    </div>
+      <h5>Triage flags and recent patient logs. This integration allows for immediate identification of high-risk patients and ensures comprehensive, accessible patient history within the EMR system.</h5>
+
+      <div style="margin-top:12px">
+        <label for="filter">Priority Filter</label>
+        <select id="filter">
+          <option value="all">All patients</option>
+          <option value="flagged">Flagged (High Risk)</option>
+        </select>
+
+        <div style="margin-top:12px" id="clinic-list">
+          <!-- dynamically filled -->
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <h3 style="margin:0">EMU Waitlist</h3>
+        <div class="quiet small" style="padding:10px">EMU beds: 2 available</div>
+        <div style="margin-top:8px">
+          <button id="prioritize" class="big-btn" style="background:#000000">Prioritize selected</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h5>EpiHelp ©2025</h5>
+  </footer>
+
+</div>
+
+<script>
+/* Lightweight prototype logic for V1 flows */
+const logsEl = document.getElementById('logs');
+const quickBtn = document.getElementById('quick-log-btn');
+const saveBtn = document.getElementById('save-log');
+const exportBtn = document.getElementById('export-json');
+const clearBtn = document.getElementById('clear-logs');
+const symptomsInput = document.getElementById('symptoms');
+const durationInput = document.getElementById('duration');
+const notesInput = document.getElementById('notes');
+const clusterAlert = document.getElementById('cluster-alert');
+const clusterText = document.getElementById('cluster-text');
+const notifyCare = document.getElementById('notify-care');
+const notifyClinic = document.getElementById('notify-clinic');
+const navLog = document.getElementById('nav-log');
+const navCare = document.getElementById('nav-care');
+const navClinic = document.getElementById('nav-clinic');
+const viewLog = document.getElementById('view-log');
+const viewCare = document.getElementById('view-care');
+const viewClinic = document.getElementById('view-clinic');
+const shareOutput = document.getElementById('share-output');
+const shareSummaryBtn = document.getElementById('share-summary');
+const clinicList = document.getElementById('clinic-list');
+const filterSelect = document.getElementById('filter');
+const prioritizeBtn = document.getElementById('prioritize');
+const voiceToggle = document.getElementById('voice-toggle');
+let recognizing = false;
+let recognition = null;
+
+/* Navigation */
+navLog.addEventListener('click', ()=>{show('log')});
+navCare.addEventListener('click', ()=>{show('care')});
+navClinic.addEventListener('click', ()=>{show('clinic')});
+function show(v){
+  navLog.setAttribute('aria-current', v==='log');
+  navCare.setAttribute('aria-current', v==='care');
+  navClinic.setAttribute('aria-current', v==='clinic');
+  viewLog.style.display = v==='log' ? '' : 'none';
+  viewCare.style.display = v==='care' ? '' : 'none';
+  viewClinic.style.display = v==='clinic' ? '' : 'none';
+  viewLog.setAttribute('aria-hidden', v!=='log');
+  viewCare.setAttribute('aria-hidden', v!=='care');
+  viewClinic.setAttribute('aria-hidden', v!=='clinic');
+}
+
+/* Storage helpers */
+function loadLogs(){
+  const raw = localStorage.getItem('seizure_logs');
+  return raw ? JSON.parse(raw) : [];
+}
+function saveLogs(arr){
+  localStorage.setItem('seizure_logs', JSON.stringify(arr));
+}
+
+/* Render logs */
+function renderLogs(){
+  const logs = loadLogs();
+  logsEl.innerHTML = '';
+  if(!logs.length) logsEl.innerHTML = '<h5>No logs yet.</h5>';
+  logs.slice().reverse().forEach((l, idx)=>{
+    const d = new Date(l.timestamp);
+    const div = document.createElement('div');
+    div.className='log-item';
+    div.setAttribute('role','listitem');
+    div.innerHTML = '<div style="display:flex;justify-content:space-between"><strong>Log</strong><span h5>'+d.toLocaleString()+'</span></div>'
+      +'<h5>Symptoms: '+(l.symptoms||'—')+'</h5>'
+      +'<h5>Duration: '+(l.duration||'—')+'s</h5>'
+      +'<h5>Notes: '+(l.notes||'—')+'</h5>';
+    logsEl.appendChild(div);
+  });
+  // cluster detection: if 3 logs within 30 minutes -> show cluster alert
+  const now = Date.now();
+  const recent = logs.filter(x => now - x.timestamp <= 1000*60*30);
+  if(recent.length >= 3){
+    clusterAlert.style.display='';
+    clusterText.textContent = `${recent.length} events in the last 30 minutes. Consider contacting care.`;
+  } else {
+    clusterAlert.style.display='none';
+  }
+  renderClinicList();
+}
+
+/* Save log */
+function addLog(obj){
+  const logs = loadLogs();
+  logs.push(obj);
+  saveLogs(logs);
+  renderLogs();
+  // vibrate if supported
+  if(navigator.vibrate) navigator.vibrate(100);
+  // announce
+  speak('Seizure logged. Summary saved locally.');
+}
+
+/* Quick log */
+quickBtn.addEventListener('click', ()=>{
+  const obj = { symptoms:'Unspecified', duration:'', notes:'Quick log', timestamp: Date.now(), source:'quick' };
+  addLog(obj);
+});
+
+/* Save from form */
+saveBtn.addEventListener('click', ()=>{
+  const obj = {
+    symptoms: symptomsInput.value.trim(),
+    duration: durationInput.value.trim(),
+    notes: notesInput.value.trim(),
+    timestamp: Date.now(),
+    source: 'manual'
+  };
+  if(!obj.symptoms && !obj.notes){
+    alert('Please add at least a symptom or note so the log is useful for clinicians.');
+    return;
+  }
+  addLog(obj);
+  // clear inputs
+  symptomsInput.value=''; durationInput.value=''; notesInput.value='';
+});
+
+/* Export JSON */
+exportBtn.addEventListener('click', ()=>{
+  const logs = loadLogs();
+  const blob = new Blob([JSON.stringify(logs, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'seizure_logs_export.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+/* Clear logs */
+clearBtn.addEventListener('click', ()=>{
+  if(confirm('Clear all local logs? This cannot be undone.')){ localStorage.removeItem('seizure_logs'); renderLogs(); }
+});
+
+/* Notify caregiver / clinic */
+notifyCare.addEventListener('click', ()=>{
+  alert('Caregiver notified.');
+  speak('Caregiver has been notified.');
+});
+notifyClinic.addEventListener('click', ()=>{
+  alert('Clinic triage notified');
+  speak('Clinic triage has been notified. Please check dashboard.');
+});
+
+/* Share summary for caregiver */
+shareSummaryBtn.addEventListener('click', ()=>{
+  const logs = loadLogs();
+  const summary = {
+    total: logs.length,
+    last: logs[logs.length-1] || null,
+    note: 'This is an anonymized shareable summary for schools or clinicians.'
+  };
+  shareOutput.style.display='';
+  shareOutput.textContent = JSON.stringify(summary, null, 2);
+  navigator.clipboard && navigator.clipboard.writeText(JSON.stringify(summary, null, 2));
+  speak('Shareable summary generated and copied to clipboard.');
+});
+
+/* Clinician dashboard rendering */
+function renderClinicList(){
+  const logs = loadLogs();
+  const flagged = logs.filter(l=> l.source==='quick' || (l.notes && l.notes.toLowerCase().includes('cluster')));
+  clinicList.innerHTML = '';
+  const items = flagged.length ? flagged.slice().reverse() : logs.slice().reverse();
+  if(!items.length) clinicList.innerHTML = '<h5>No patient activity.</h5>';
+  items.forEach((l, i)=>{
+    const d = new Date(l.timestamp);
+    const div = document.createElement('div');
+    div.className='card';
+    div.style.marginTop='8px';
+    div.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><div><strong>Patient</strong><h5>'+d.toLocaleString()+'</h5><input type="checkbox"></div><div><button data-idx="'+i+'"class="big-btn">View</button></div></div>'
+      +'<h5 style="margin-top:8px">Symptoms: '+(l.symptoms||'—')+' • Duration: '+(l.duration||'—')+'s</h5>';
+    clinicList.appendChild(div);
+  });
+}
+
+/* prioritize button */
+prioritizeBtn.addEventListener('click', ()=>{
+  alert('Selected patients prioritized.');
+  speak('Patients prioritized in the EMU waitlist.');
+});
+
+/* Text-to-speech helper */
+function speak(text){
+  if('speechSynthesis' in window){
+    const u = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
+}
+
+/* Voice recognition (simple) */
+if('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SR();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  recognition.onresult = (e)=>{
+    const tr = e.results[0][0].transcript;
+    // set symptoms input and auto-save
+    symptomsInput.value = tr;
+    speak('Voice captured. Press Save to log.');
+  };
+  recognition.onend = ()=>{ recognizing=false; voiceToggle.textContent='Voice Log'; voiceToggle.style.background='#2b79b3'; }
+  recognition.onerror = (e)=>{ recognizing=false; voiceToggle.textContent='Voice Log'; voiceToggle.style.background='#2b79b3'; alert('Voice error: '+e.error); }
+  voiceToggle.addEventListener('click', ()=>{
+    if(recognizing){ recognition.stop(); return; }
+    recognition.start(); recognizing=true; voiceToggle.textContent='Listening...'; voiceToggle.style.background='#0f4c81';
+  });
+} else {
+  voiceToggle.addEventListener('click', ()=>{ alert('Voice recognition not supported in this browser.'); });
+}
+
+
+let cont = document.getElementById("app");
+function changeSizeByBtn(size) {
+    // Set value of the parameter as fontSize
+    cont.style.fontSize = size;
+}
+function changeSizeBySlider() {
+    let slider = document.getElementById("slider");
+    // Set slider value as fontSize
+    cont.style.fontSize = slider.value + "px";
+}
+
+function changeSizeBySlider2() {
+    let slider = document.getElementsByClassName("small");
+    // Set slider value as fontSize
+    cont.style.fontSize = slider.value + "px";
+}
+
+/* init */
+renderLogs();
+show('log');
+
+</script>
+</body>
+</html>
